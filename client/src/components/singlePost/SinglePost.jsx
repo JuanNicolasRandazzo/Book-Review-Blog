@@ -34,7 +34,9 @@ export const SinglePost = () => {
                     </div>
                 </h1>
                 <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author: <b>Friedrich Nietzche</b></span>
+                    {post.author && (
+                        <span className="singlePostAuthor">Author: <b>{post.author.name}</b></span>
+                    )}
                     <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
                 </div>
                 <p className="singlePostContent">

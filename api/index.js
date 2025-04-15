@@ -8,6 +8,7 @@ const userRoute = require('./routes/users');
 const genreRoute = require('./routes/genres');
 const postRoute = require('./routes/posts');
 const categoryRoute = require('./routes/categories');
+const authorRoute = require('./routes/authors');
 
 
 
@@ -26,6 +27,7 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/genres", genreRoute);
 app.use("/api/categories", categoryRoute);
+app.use("/api/authors", authorRoute);
 
 app.listen(port, () => {
     console.log('backend is running on port', port)

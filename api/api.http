@@ -127,8 +127,8 @@ PUT http://localhost:8000/api/posts/67e991f9a5552104b648b125
 Content-Type: application/json
 
 {
-    "userId": "67e2f6074f0e4a2451b58d7c",
-    "title" : "Thus Spoke Zarathustra"
+    "userId": "67e2f6074f0e4a2451b58d7c",   
+    "author" : "67fe903ff9f40c20b0dff9ce"
     
 }
 
@@ -144,4 +144,17 @@ Content-Type: application/json
 
 {
     "userId": "67e1ce425d2a106ef5e41593"
+}
+
+### ------- AUTHORS -------
+POST http://localhost:8000/api/authors
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "name": "Friedrich Nietzsche",
+    "bio": "Friedrich Nietzsche was a 19th-century German philosopher known for his radical critique of traditional morality,\nreligion—especially Christianity—and Western culture. He studied classical philology and became a professor at a young age,\nbut had to retire early due to health problems. Throughout his life, he wrote deep and provocative works that had a profound\ninfluence on modern philosophy, psychology, literature, and the arts. In 1889, Nietzsche suffered a mental breakdown,\npossibly due to tertiary syphilis, and spent his remaining years incapacitated under the care of his mother and sister.\nHis work gained significant recognition posthumously, and he is now regarded as one of the most influential thinkers in history.",
+    "birthDate": "1844-10-15",
+    "deathDate": "1900-08-25",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nietzsche1882.jpg/250px-Nietzsche1882.jpg"
 }
