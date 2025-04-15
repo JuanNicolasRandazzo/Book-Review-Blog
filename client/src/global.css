@@ -1,0 +1,14 @@
+:root {
+    --primary-color: #6A0DAD;   /* Morado principal */
+    --secondary-color: #8A2BE2; /* Violeta brillante */
+    --accent-color: #E43F5A;    /* Rojo vibrante para detalles */
+    --contrast-color: #2D2E72;  /* Azul profundo para contrastes */
+    --background-color: #3A2D4F;
+    --second-background-color: #1E1E2E;/* Fondo oscuro elegante */
+    --text-color: #E0E0E0;
+    --title-color: #444;      /* Blanco suave para legibilidad */
+}
+
+body{
+    background-color: var(--background-color);
+}

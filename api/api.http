@@ -1,0 +1,147 @@
+
+### ------- USERS -------
+
+### Create user/register
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "Nick Stormblessed",
+    "email": "nick@stormblessed.com",
+    "password": "2345",
+    "isAdmin": true
+
+}
+
+### Create user/login
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "Kaladin Stormblessed",
+    "email": "Davar@patern.com",
+    "password": "1234"
+}
+
+### Update user
+PUT http://localhost:8000/api/users/67e1ce425d2a106ef5e41593
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "username": "Dalinar Kholin",
+    "email": "Davar@patern.com",
+    "password": "Adolin123"
+}
+
+### Delete user
+DELETE http://localhost:8000/api/users/67e2f58f7307839edcf419dd
+Content-Type: application/json
+
+{
+    "userId": "67e2f58f7307839edcf419dd"
+}
+
+### Get user
+GET http://localhost:8000/api/users/67e1ce425d2a106ef5e41593
+
+
+
+### ------- GENRES -------
+
+### Create Genre
+POST http://localhost:8000/api/genres
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "name": "Poetry"
+}
+
+### Get all genres
+GET http://localhost:8000/api/genres
+
+### Get genre by id
+GET http://localhost:8000/api/genres/67e2ef956b3cb5b1ca8e9e00
+
+### Update Genre
+
+### Delete Genre
+DELETE http://localhost:8000/api/genres/67e3085cf5a0668ebd1af406
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c"
+}
+
+
+
+### ------- CATEGORIES -------
+
+### Create Category
+POST http://localhost:8000/api/categories
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "name": "News"
+}
+
+### Get all Categories
+GET http://localhost:8000/api/categories
+
+### Get Category by id
+GET http://localhost:8000/api/categories/67e326b937282a761715acc2
+
+### Delete Category
+DELETE http://localhost:8000/api/categories/67e42b4271110822730e4ee0
+Content-Type: application/json
+
+{
+    "userId": "67e42b4271110822730e4ee0"
+    
+}
+
+
+
+
+### ------- POSTS -------
+
+### Create Post
+POST http://localhost:8000/api/posts
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "title" : "The Way of Kings",
+    "description": "The Way of Kings is the first book in Brandon Sanderson's epic fantasy series, The Stormlight Archive. It introduces readers to a richly detailed world filled with magic, political intrigue, and complex characters.",
+    "content": "Brandon Sanderson’s The Way of Kings is not just a novel; it’s an experience. With its intricate world-building, deeply developed characters, and a unique magic system, this book sets the stage for one of the most ambitious fantasy series ever written. The story follows multiple protagonists, but at its heart, it focuses on three main figures: Kaladin, a former soldier struggling with despair; Shallan, a young scholar with a dangerous secret; and Dalinar, a war-hardened noble tormented by visions. Sanderson masterfully weaves their stories together, creating a narrative that is both emotionally engaging and intellectually satisfying. One of the book’s greatest strengths is its world-building. Roshar, the continent where the story takes place, feels alive with its unique ecology, culture, and history. The highstorms, the spren, and the Shardblades all add layers of depth that make the setting feel truly immersive. Another highlight is the character development. Kaladin’s journey from a broken slave to a leader of men is one of the most compelling arcs in modern fantasy. His struggles with depression and duty feel real and relatable. Shallan’s wit and hidden struggles make her a fascinating character, while Dalinar’s conflict between honor and ambition adds a layer of complexity rarely seen in high fantasy. If there is one downside, it’s that The Way of Kings is a slow burn. Sanderson takes his time laying the foundation for the series, which might not appeal to readers looking for immediate action. However, for those willing to invest in the journey, the payoff is immense. Overall, The Way of Kings is a must-read for fantasy lovers. It’s a book that challenges and rewards its readers, leaving them eager to pick up the next installment.",
+    "image": "https://m.media-amazon.com/images/I/81cO02Zz6VL._UF894,1000_QL80_.jpg",
+    "categories": "67e326b937282a761715acc2",
+    "genres": ["67e2ed9ccffdfec3b25dee8a", "67e2ef956b3cb5b1ca8e9e00" , "67e6f928675bcd9b09b8dfb1"],
+    "rating": 5
+}
+    
+### Update a post
+PUT http://localhost:8000/api/posts/67e991f9a5552104b648b125
+Content-Type: application/json
+
+{
+    "userId": "67e2f6074f0e4a2451b58d7c",
+    "title" : "Thus Spoke Zarathustra"
+    
+}
+
+### Get all posts
+GET http://localhost:8000/api/posts
+
+### Get post by userId
+GET http://localhost:8000/api/posts/users/67e1ce425d2a106ef5e41593/posts
+
+### Delete a post
+DELETE http://localhost:8000/api/posts/67e99ac2c90c8dca9f3dfc5d
+Content-Type: application/json
+
+{
+    "userId": "67e1ce425d2a106ef5e41593"
+}

@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #6A0DAD;   /* Morado principal */
+    --secondary-color: #8A2BE2; /* Violeta brillante */
+    --accent-color: #E43F5A;    /* Rojo vibrante para detalles */
+    --contrast-color: #2D2E72;  /* Azul profundo para contrastes */
+    --background-color: #1E1E2E; /* Fondo oscuro elegante */
+    --text-color: #E0E0E0;
+    --title-color: #444;      /* Blanco suave para legibilidad */
+}
+
+.header{
+    margin-top: 60px;
+}
+
+.headerTitles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Lora", serif;
+    color:white; /*rgb(135, 126, 159)*/
+}
+
+.headerTitleSm{
+    position: absolute;
+    top: 11%;
+    font-size: 25px;
+}
+.headerTitleLg{
+    position: absolute;
+    top: 13%;
+    font-size: 105px;
+}
+
+.headerImg{
+    width: 100%;
+    height: 450px;
+    margin-top: 80px;
+    object-fit: cover;
+}
