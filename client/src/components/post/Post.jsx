@@ -23,7 +23,13 @@ export const Post = ({post}) => {
             </Link>
             
             
-            <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
+            <span className="postDate">{new Date(post.createdAt).toLocaleDateString(
+                "en-US", {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }
+            )}</span>
         </div>
         <p className="postDesc">
             {post.description}

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./singlePost.css";
 import axios from "axios";
@@ -24,26 +24,38 @@ export const SinglePost = () => {
                         alt=""
                     />)
                 }
-                
+
                 <div className="singlePostText">
-                <h1 className="singlePostTitle">
-                    {post.title}
-                    <div className="singlePostEdit">
-                        <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
-                        <i className="singlePostIcon fa-solid fa-trash"></i>
+                    <h1 className="singlePostTitle">
+                        {post.title}
+                        <div className="singlePostEdit">
+                            <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
+                            <i className="singlePostIcon fa-solid fa-trash"></i>
+                        </div>
+                    </h1>
+                    <div className="singlePostInfo">
+                        {post.author && (
+                            <span className="singlePostAuthor">
+                                Author: 
+                                <Link to={`/authors/${post.author._id}`} className="link">
+                                    <b>{post.author.name}</b>
+                                </Link>
+                                
+                            
+                            </span>
+                        )}
+                        <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
                     </div>
-                </h1>
-                <div className="singlePostInfo">
-                    {post.author && (
-                        <span className="singlePostAuthor">Author: <b>{post.author.name}</b></span>
-                    )}
-                    <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
+                    <p className="singlePostContent">
+                        {post.content}
+                    </p>
+                    <div className="singlePostCreatedBy">
+                        {post.userId && (
+                            <span className="singlePostCreatedByText">Created by: <b>{post.userId.username}</b></span>
+                        )}
+                    </div>
                 </div>
-                <p className="singlePostContent">
-                    {post.content}
-                </p>
-                </div>
-                
+
             </div>
         </div>
     )

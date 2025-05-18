@@ -124,7 +124,7 @@ router.get("/users/:userId/posts", async (req, res) => {
 // GET POST BY ID
 router.get('/:id', async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id).populate("categories genres author"); // opcional: populate genres también
+        const post = await Post.findById(req.params.id).populate("categories genres author userId"); // opcional: populate genres también
         if (!post) {
             return res.status(404).json("Post not found");
         }
