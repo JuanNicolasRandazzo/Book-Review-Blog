@@ -24,14 +24,12 @@ Content-Type: application/json
 }
 
 ### Update user
-PUT http://localhost:8000/api/users/67e1ce425d2a106ef5e41593
+PUT http://localhost:8000/api/users/67e2f6074f0e4a2451b58d7c
 Content-Type: application/json
 
 {
     "userId": "67e2f6074f0e4a2451b58d7c",
-    "username": "Dalinar Kholin",
-    "email": "Davar@patern.com",
-    "password": "Adolin123"
+    "password": "1234"
 }
 
 ### Delete user
