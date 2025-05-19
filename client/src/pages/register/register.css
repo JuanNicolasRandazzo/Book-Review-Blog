@@ -63,3 +63,9 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+.registerError{
+    color: var(--accent-color);
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 14px;
+}

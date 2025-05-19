@@ -7,6 +7,18 @@ const bcrypt = require('bcrypt');
 router.post('/register', async (req, res) => {
     try {
 
+        // Check if the user with the same username already exists
+        const existingUserByUsername = await User.findOne({ username: req.body.username });
+        if (existingUserByUsername) {
+            return res.status(409).json("This username is already taken.");
+        }
+
+        // Check if the user with the same email already exists
+        const existingUserByEmail = await User.findOne({ email: req.body.email });
+        if (existingUserByEmail) {
+            return res.status(409).json("This email is already taken.");
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
