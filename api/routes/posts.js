@@ -96,18 +96,6 @@ router.delete('/:id', async (req, res) => {
 
 });
 
-
-//GET ALL POSTS
-router.get('/', async (req, res) => {
-    try {
-        const posts = await Post.find().populate("categories");
-        res.status(200).json(posts);
-    } catch (err) {
-        console.error("Error fetching posts:", err);
-        res.status(500).json(err);
-    }
-});
-
 // Post by userId
 router.get("/users/:userId/posts", async (req, res) => {
     try {
@@ -148,4 +136,73 @@ router.get('/:id', async (req, res) => {
 
 });
 
+
+
+router.get("/", async (req, res) => {
+    const username = req.query.user;
+    const catName = req.query.cat;
+    try {
+        let posts;
+        if (username) {
+            posts = await Post.find({ username });
+        } else if (catName) {
+            posts = await Post.find({
+                categories: {
+                    $in: [catName],
+                },
+            });
+        } else {
+            posts = await Post.find();
+        }
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
+
+
+
+
+
+
+
+// Code deleted 
+
+/*
+//GET ALL POSTS
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find().populate("categories");
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error("Error fetching posts:", err);
+        res.status(500).json(err);
+    }
+});
+
+// Get post by category
+router.get('/', async (req, res) => {
+    try {
+        const queryCat = req.query.cat;
+        let posts;
+
+        if (queryCat) {
+            posts = await Post.find({
+                categories: {
+                    $in: [queryCat]
+                }
+            }).populate("categories")
+        } else {
+            posts = await Post.find().populate("categories");
+        }
+
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error("Error fetching posts by category:", err);
+        res.status(500).json(err);
+    }
+});
+*/
