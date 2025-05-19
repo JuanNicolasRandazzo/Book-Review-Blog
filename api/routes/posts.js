@@ -144,15 +144,15 @@ router.get("/", async (req, res) => {
     try {
         let posts;
         if (username) {
-            posts = await Post.find({ username });
+            posts = await Post.find({ username }).populate("categories"); // opcional: populate genres también
         } else if (catName) {
             posts = await Post.find({
                 categories: {
                     $in: [catName],
                 },
-            });
+            }).populate("categories");
         } else {
-            posts = await Post.find();
+            posts = await Post.find().populate("categories");
         }
         res.status(200).json(posts);
     } catch (err) {
