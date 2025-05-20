@@ -68,4 +68,6 @@
     color: var(--accent-color);
     font-family: "Josefin Sans", sans-serif;
     font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }

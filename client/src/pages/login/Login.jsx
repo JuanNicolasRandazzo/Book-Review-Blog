@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./login.css";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
@@ -9,6 +9,8 @@ export const Login = () => {
 const userRef = useRef();
 const passwordRef = useRef();
 const {  dispatch, isFetching } = useContext(Context);
+
+const [error, setError] = useState("");
 
 const handleSubmit = async (e) => {
   e.preventDefault(e);
@@ -21,6 +23,13 @@ const handleSubmit = async (e) => {
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data})
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE" });
+
+    if (err.response && err.response.status === 400) {
+      setError(err.response.data);
+    } else {
+      setError("An error ocurred during login. Try again.");
+      console.error("Login error: ", err);
+    }
   }
 };
   
@@ -47,6 +56,7 @@ const handleSubmit = async (e) => {
             <button className="loginRegisterButton">
               <Link className="link" to="/register">Register</Link>
             </button>
+            {error && <span className="loginError">{error}</span>}
         </form>
     </div>
   )
