@@ -4,6 +4,7 @@ import axios from "axios";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { Context } from "../../context/Context";
+import { useNavigate } from 'react-router-dom';
 
 
 export const Write = () => {
@@ -18,6 +19,8 @@ export const Write = () => {
     const [categories, setCategories] = useState([]);
     const [slectedCategory, setSelectedCategory] = useState("");
     const { user } = useContext(Context);
+    const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetchAuthors = async () => {
@@ -50,7 +53,11 @@ export const Write = () => {
 
         if (!selectedAuthor && newAuthor) {
             try {
-                const res = await axios.post("/authors", { name: newAuthor});
+                const res = await axios.post("/authors", { 
+                  name: newAuthor,
+                  userId: user._id
+
+                });
                 authorId = res.data._id;
             } catch (err) {
                 console.error("error creating new author", err);
@@ -81,7 +88,16 @@ export const Write = () => {
         try {
            const res = await axios.post("/posts", newPost);
            console.log("New post created", res.data)
-           window.location.replace("/post" + res.data._id);
+           // window.location.replace("/post" + res.data._id);
+            if (res.data && res.data._id) { // O simplemente if (res.data) si no necesitas el ID para esta redirección
+               console.log("Navigating to Home Page");
+               navigate("/"); // <--- REDIRIGE A LA RUTA RAÍZ (HOME)
+           } else {
+               console.error("Post creation might have failed or response is unexpected.");
+               // Quizás no redirigir o redirigir a home como fallback
+               // navigate("/");
+           }
+          
         } catch (err) {
             console.error("Error creating post", err)
         }

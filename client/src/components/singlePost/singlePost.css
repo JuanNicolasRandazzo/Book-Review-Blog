@@ -185,7 +185,6 @@
 .singlePostCreatedBy {
     margin-top: auto; /* Empuja este elemento al final del contenedor .singlePostText (si es flex column) */
     padding-top: 15px;
-    border-top: 1px solid rgba(247, 228, 118, 0.2); /* Línea divisoria sutil */
     font-size: 14px;
     color: var(--golden);
     font-family: "Varela", sans-serif;
@@ -196,4 +195,22 @@
     color: var(--text-color); /* Nombre del creador más destacado */
 }
 
+.singlePostRating {
+    display: flex;
+    align-items:start;
+    gap: 5px;
+    color: var(--golden);
+    margin-top: none;
+    position: relative; /* <--- AÑADE ESTO */
+    top: 5px;
+}
 
+.postMetaLine {
+    display: flex;         /* Activa Flexbox */
+    align-items: center;   /* Alinea los ítems verticalmente al centro */
+    gap: 15px;             /* Espacio entre las estrellas y el texto "Created by" */
+    margin-top: 15px;      /* Espacio opcional arriba de esta línea */
+    /* Puedes añadir flex-wrap: wrap; si quieres que se muevan a la siguiente línea en pantallas pequeñas */
+     border-top: 1px solid rgba(247, 228, 118, 0.2); /* Línea divisoria sutil */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+}
