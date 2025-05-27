@@ -123,6 +123,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+/*
 // GET POST
 router.get('/:id', async (req, res) => {
     try {
@@ -135,7 +136,7 @@ router.get('/:id', async (req, res) => {
     }
 
 });
-
+*/
 
 
 router.get("/", async (req, res) => {

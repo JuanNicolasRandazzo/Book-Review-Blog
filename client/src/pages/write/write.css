@@ -3,22 +3,27 @@
     --secondary-color: #8A2BE2; /* Violeta brillante */
     --accent-color: #E43F5A;    /* Rojo vibrante para detalles */
     --contrast-color: #2D2E72;  /* Azul profundo para contrastes */
-    --background-color: #1E1E2E; /* Fondo oscuro elegante */
-    --text-color: #E0E0E0; 
+    --background-color: #1E1E2E; /* Fondo oscuro elegante (ESTE ES EL MORADO QUE VES EN LOS INPUTS) */
+    --text-color: #E0E0E0;
     --golden: #f7e476;     /* Blanco suave para legibilidad */
+    --dark-text-color: #333333; /* Nuevo: Para texto sobre fondos claros */
+    --placeholder-color: #999999; /* Nuevo: Para placeholders sobre fondos claros */
 }
 
 .write{
     padding-top: 50px;
-    display: -webkit-box;
+    display: flex; /* Usar flex moderno */
+    flex-direction: column; /* Para que la imagen y el form se apilen si es necesario */
     align-items: center;
     justify-content: center;
     gap: 20px;
+    background-color: var(--background-color); /* Asegúrate que el fondo general es el morado */
+    min-height: 100vh; /* Para que ocupe toda la altura */
 }
 
 .writeImg{
-    margin-left: 150px;
-    /*width: 70vw;*/
+    /* margin-left: 150px; /* Considera centrarlo o usar auto márgenes */
+    max-width: 70vw; /* Que no exceda un % del viewport */
     height: 250px;
     border-radius: 10px;
     object-fit: cover;
@@ -26,14 +31,20 @@
 
 .writeForm{
     position: relative;
-    width: 60%;
-    padding: 20px;
+    width: 70%; /* Ajusta este ancho según necesites, ej. 70% o 800px */
+    max-width: 800px; /* Un máximo para que no se extienda demasiado en pantallas grandes */
+    padding: 30px; /* Aumenta un poco el padding */
+    background-color: white; /* El fondo del formulario SÍ es blanco */
+    border-radius: 10px; /* Opcional: para suavizar bordes */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Opcional: una sombra sutil */
 }
 
 .writeFormGroup{
-    margin-left: 24px;
+    /* margin-left: 24px; /* Quita esto si quieres que los inputs usen todo el ancho del form */
     display: flex;
     align-items: center;
+    margin-bottom: 20px; /* Espacio entre grupos de inputs */
+    gap: 15px; /* Espacio entre elementos dentro del grupo (ej. icono y input, o select e input)*/
 }
 
 .writeIcon{
@@ -47,40 +58,107 @@
     font-size: 20px;
     color: var(--golden);
     cursor: pointer;
+    flex-shrink: 0; /* Para que no se encoja si el input es muy grande */
 }
 
-.writeInput{
-    font-size: 30px;
-    border: none;
-    padding: 20px;
-    width: 70vw;
-    background-color: var(--background-color);
-    color: var(--text-color);
+.writeInput,
+.writeDescription textarea, /* Aplicar también al textarea dentro de .writeDescription */
+.writeRating input[type="number"] { /* Aplicar también al input de rating */
+    font-size: 18px; /* Reducir un poco para mejor proporción */
+    border: 1px solid #ccc; /* Un borde sutil para los campos */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Ajustar padding */
+    width: 100%; /* Que ocupe el 100% de su contenedor (.writeFormGroup o el div que lo contenga) */
+    background-color: white; /* ¡CAMBIO IMPORTANTE! */
+    color: var(--dark-text-color); /* ¡CAMBIO IMPORTANTE! Texto oscuro sobre fondo blanco */
+    box-sizing: border-box; /* Para que padding y border no aumenten el ancho total */
 }
 
-.writeInput:focus{
+/* Específico para el input de título para mantenerlo más grande si se desea */
+.writeFormGroup input[placeholder="Title"].writeInput {
+    font-size: 24px; /* Puedes mantenerlo más grande */
+    padding: 15px;
+}
+
+
+.writeInput:focus,
+.writeDescription textarea:focus,
+.writeRating input[type="number"]:focus,
+.writeSelect:focus {
     outline: none;
+    border-color: var(--primary-color); /* Resaltar con color primario al enfocar */
+    box-shadow: 0 0 0 2px rgba(106, 13, 173, 0.2); /* Sombra sutil al enfocar */
 }
 
-.writeInput::placeholder{
-    color: var(--text-color);
+.writeInput::placeholder,
+.writeDescription textarea::placeholder,
+.writeRating input[type="number"]::placeholder {
+    color: var(--placeholder-color); /* ¡CAMBIO IMPORTANTE! Placeholder más oscuro */
 }
-.writeText{
-    font-size: 20px;
-    height:100vh;
-    border: 2px solid var(--golden);
+
+/* Estilos para el select */
+.writeSelect {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: white; /* ¡CAMBIO IMPORTANTE! */
+    color: var(--dark-text-color); /* ¡CAMBIO IMPORTANTE! */
+    flex-grow: 1; /* Para que ocupe el espacio disponible si está en un flex container */
+    box-sizing: border-box;
 }
+
+/* El textarea dentro de .writeDescription necesita sus propios estilos si no usa .writeInput */
+.writeDescription textarea {
+    height: 100px; /* Altura inicial para el textarea de descripción */
+    resize: vertical; /* Permitir redimensionar verticalmente */
+}
+
+.writeCategory{
+    margin-bottom: 20px;
+}
+
+/* ReactQuill necesita que su contenedor tenga un fondo blanco si el editor es blanco */
+.writeFormGroup .ql-toolbar {
+    background-color: #f8f9fa; /* Un gris muy claro para la barra de herramientas */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #ccc; /* Separador */
+}
+.writeFormGroup .ql-container {
+    background-color: white;
+    color: var(--dark-text-color);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    min-height: 200px; /* Altura mínima para el editor */
+}
+.writeFormGroup .ql-editor::before {
+    color: var(--placeholder-color) !important; /* Placeholder del editor */
+}
+
+
 
 .writeSubmit{
     position: absolute;
-    top: 20px;
-    right: -62px;
+    top: 30px; /* Ajustar posición */
+    right: -100px; /* Ajustar posición para que quede fuera del form si es necesario */
     color: var(--text-color);
     background-color: var(--primary-color);
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
+.writeSubmit:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Ajustes para los contenedores específicos si es necesario */
+.writeRating, .writeDescription {
+    display: flex; /* Para que el input/textarea use el width: 100% correctamente */
+    /* margin-left: 24px; /* Similar a writeFormGroup si se quiere indentación */
+    margin-bottom: 20px;
+}

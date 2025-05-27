@@ -13,14 +13,16 @@ export const SinglePost = () => {
             setPost(res.data);
         }
         getPost();
-    }, [path])
+    }, [path]);
+
+    const PF = "http://localhost:8000/images/";
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
                 {post.image && (
                     <img
                         className="singlePostImg"
-                        src={post.image}
+                        src={PF + post.image}
                         alt=""
                     />)
                 }
@@ -38,7 +40,7 @@ export const SinglePost = () => {
                             <span className="singlePostAuthor">
                                 Author: 
                                 <Link to={`/authors/${post.author._id}`} className="link">
-                                    <b>{post.author.name}</b>
+                                    <b> {post.author.name} </b>
                                 </Link>
                                 
                             
@@ -46,8 +48,9 @@ export const SinglePost = () => {
                         )}
                         <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
                     </div>
-                    <p className="singlePostContent">
-                        {post.content}
+                    <p className="singlePostContent" 
+                    dangerouslySetInnerHTML={{ __html: post.content }}>
+                        
                     </p>
                     <div className="singlePostCreatedBy">
                         {post.userId && (

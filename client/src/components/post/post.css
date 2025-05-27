@@ -27,21 +27,22 @@
     color: var(--text-color);
 }
 
-.postCat{
+.postCats{
     font-family: "Varela", sans-serif;
     font-size: 11px;
     color: #be9656;
     line-height: 20px;
-    margin-top: 15px;
+    margin-top: 6px;
     margin-right: 10px;
     cursor: pointer;
+    margin-bottom: 6px;
 }
 
 .postTitle{
     font-family: "Josefin Sans", sans-serif;
     font-size: 24px;
     font-weight: 700;
-    margin-top: 15px;
+    margin-top: 20px;
     cursor: pointer;
 }
 .postDate{

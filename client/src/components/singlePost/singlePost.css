@@ -8,83 +8,192 @@
     --golden: #f7e476;     /* Blanco suave para legibilidad */
 }
 
-.singlePost{
-    flex: 9;
+.singlePost {
+    flex: 9; /* Asumiendo que es parte de un layout flex mayor (ej. con una sidebar) */
+    background-color: var(--background-color); /* Fondo oscuro para toda la vista del post */
+    padding: 20px; /* Espaciado general para la página del post */
+    color: var(--text-color); /* Color de texto por defecto para la página */
 }
-.singlePostWrapper{
+
+.singlePostWrapper {
+    display: flex; /* Organiza imagen y texto en una fila */
+    align-items: flex-start; /* Alinea la parte superior de la imagen y el texto */
+    gap: 30px; /* Espacio entre la imagen y el bloque de texto */
+    max-width: 1200px; /* Un ancho máximo para el contenido del post */
+    margin: 0 auto; /* Centra el wrapper si la pantalla es más ancha que max-width */
+}
+
+.singlePostImg {
+    width: 400px; /* ANCHO FIJO para la imagen */
+    height: 588px; /* ALTO FIJO para la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse (recortará si es necesario) */
+    border-radius: 8px; /* Bordes redondeados suaves */
+    flex-shrink: 0; /* Evita que la imagen se encoja si el contenido de texto es muy ancho */
+}
+
+.singlePostText {
+    flex-grow: 1; /* Permite que el bloque de texto ocupe el espacio restante */
+    min-width: 0; /* Importante para flex items para prevenir desbordamientos con contenido largo */
     display: flex;
-    align-items: flex-start; /* Alinea elementos verticalmente en la parte superior */
-    padding: 20px;
-    padding-right: 0;
-    color: white;
-
+    flex-direction: column; /* Apila los elementos de texto verticalmente */
 }
 
-.singlePostImg{
-    width: 100%; 
-    height: 500px; 
-    object-fit: cover; 
-    border-radius: 5px;
-    flex: 1; /* Ocupa espacio proporcional en la izquierda */
-    margin-right: 20px; /* Espacio entre la imagen y el contenido */
-}
-.singlePostTitle{
-    text-align: center;
-    margin: 10px;
+.singlePostTitle {
+    margin: 0 0 15px 0; /* Margen inferior para separar del resto */
     font-family: "Lora", serif;
-    font-size: 28px;
-}
-.singlePostTitle, .singlePostContent {
-    flex: 2; /* Ocupa más espacio a la derecha */
-}
-
-.singlePostEdit{
-    float: right;
-    font-size: 16px;
-}
-.singlePostIcon{
-    margin-left: 10px;
-    cursor:pointer;
+    font-size: 32px; /* Un poco más grande para el título principal */
+    font-weight: 700;
+    color: var(--golden); /* Título destacado */
+    line-height: 1.3;
+    display: flex; /* Para alinear el título y los iconos de edición */
+    justify-content: space-between; /* Título a la izquierda, iconos a la derecha */
+    align-items: center; /* Alineación vertical de título e iconos */
 }
 
-.singlePostIcon:first-child{
-    color: teal;
+.singlePostEdit {
+    display: flex; /* Organiza los iconos */
+    gap: 15px; /* Espacio entre iconos de edición */
+    font-size: 18px; /* Tamaño de los iconos */
 }
-.singlePostIcon:last-child{
+
+.singlePostIcon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.singlePostIcon:first-child { /* Icono de editar */
+    color: var(--secondary-color);
+}
+.singlePostIcon:first-child:hover {
+    color: var(--primary-color);
+}
+
+.singlePostIcon:last-child { /* Icono de borrar */
     color: var(--accent-color);
 }
-.singlePostInfo{
-    margin-bottom: 20px;
+.singlePostIcon:last-child:hover {
+    color: #c0392b; /* Un rojo más oscuro al pasar el ratón */
+}
+
+.singlePostInfo {
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    align-items: center;
+    font-size: 15px;
     color: var(--golden);
     font-family: "Varela", sans-serif;
+    flex-wrap: wrap; /* Para que se ajuste en pantallas pequeñas */
+    gap: 10px 20px; /* Espacio vertical y horizontal si los elementos se envuelven */
+    border-bottom: 1px solid rgba(247, 228, 118, 0.2); /* Línea sutil debajo de la info */
+    padding-bottom: 15px;
 }
 
-.singlePostContent{
+.singlePostAuthor b {
+    color: var(--text-color); /* Nombre del autor más destacado que "Author:" */
+}
+
+.link {
+    text-decoration: none;
+    font-weight: normal; /* El <b> ya lo hace bold */
+}
+
+.link:hover {
+    color: var(--golden);
+}
+
+.singlePostContent {
     color: var(--text-color);
     font-family: "Literata", serif;
-    font-size:18px ;
-    line-height: 25px;
-    white-space: pre-wrap; /* Mantiene los saltos de línea en el texto */
-    
+    font-size: 18px;
+    line-height: 1.7; /* Espaciado de línea para mejor legibilidad */
+    margin-bottom: 30px;
+    /* white-space: pre-wrap; /* Mantenlo si el contenido de ReactQuill necesita preservar espacios/saltos de línea tal cual */
 }
 
-.singlePostContent::first-letter{
-    margin-left: 20px;
-    font-size: 30px;
-    font-weight: 600;
+/* Estilos para el contenido HTML insertado desde ReactQuill */
+.singlePostContent > *:first-child {
+    margin-top: 0; /* Evitar doble margen si el primer elemento es un p o h */
 }
 
-.singlePostCreatedBy{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: end;
-    font-size: 16px;
+.singlePostContent h1,
+.singlePostContent h2,
+.singlePostContent h3,
+.singlePostContent h4,
+.singlePostContent h5,
+.singlePostContent h6 {
+    color: var(--golden);
+    font-family: "Lora", serif;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    line-height: 1.4;
+}
+
+.singlePostContent p {
+    margin-bottom: 1.2em;
+}
+
+.singlePostContent ul,
+.singlePostContent ol {
+    margin-left: 25px;
+    margin-bottom: 1.2em;
+}
+
+.singlePostContent li {
+    margin-bottom: 0.5em;
+}
+
+.singlePostContent a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+.singlePostContent a:hover {
+    color: var(--primary-color);
+}
+
+.singlePostContent blockquote {
+    border-left: 4px solid var(--golden);
+    padding-left: 20px;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #b0b0b0; /* Un gris ligeramente más claro para citas */
+}
+
+.singlePostContent pre {
+    background-color: #2b2b2b; /* Fondo ligeramente diferente al principal */
+    color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Fira Code", "Courier New", Courier, monospace; /* Fuente monoespaciada para código */
+    font-size: 0.9em;
+    margin: 1.5em 0;
+}
+
+/* Opcional: Estilo para la primera letra del primer párrafo del contenido */
+.singlePostContent > p:first-of-type::first-letter {
+    font-size: 3em; /* Tamaño de la letra capital */
+    font-weight: bold;
+    color: var(--golden);
+    float: left; /* Para que el texto fluya alrededor */
+    line-height: 0.8; /* Ajustar para alinear con el texto */
+    margin-right: 0.1em; /* Espacio a la derecha de la letra capital */
+    margin-top: 0.1em; /* Pequeño ajuste vertical si es necesario */
+}
+
+
+.singlePostCreatedBy {
+    margin-top: auto; /* Empuja este elemento al final del contenedor .singlePostText (si es flex column) */
+    padding-top: 15px;
+    border-top: 1px solid rgba(247, 228, 118, 0.2); /* Línea divisoria sutil */
+    font-size: 14px;
     color: var(--golden);
     font-family: "Varela", sans-serif;
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+.singlePostCreatedByText b {
+    color: var(--text-color); /* Nombre del creador más destacado */
 }
 
 

@@ -8,58 +8,113 @@
     --golden: #f7e476;     /* Blanco suave para legibilidad */
 }
 
-.author{
-    flex: 9;
-}
-.authorWrapper{
-    display: flex;
-    align-items: flex-start; /* Alinea elementos verticalmente en la parte superior */
-    padding: 20px;
-    padding-right: 0;
-    color: white;
-}
-
-.authorImg{
-    width: 100%; 
-    height: 500px; 
-    object-fit: cover; 
-    border-radius: 5px;
-    flex: 1; /* Ocupa espacio proporcional en la izquierda */
-    margin-right: 20px; /* Espacio entre la imagen y el contenido */
-}
-.authorName{
-
-    text-align: center;
-    margin: 10px;
-    font-family: "Lora", serif;
-    font-size: 28px;
-}
-
-.authorName, .authorBio{
-    flex: 2,
-}
-
-.authorDates{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    color: var(--golden);
-    font-family: "Varela", sans-serif;
-    
-}
-
-.authorbio{
+.authorPage { /* Contenedor principal de la página del autor */
+    flex: 9; /* Si es parte de un layout flex */
+    background-color: var(--background-color);
+    padding: 30px 20px; /* Más padding vertical */
     color: var(--text-color);
+    min-height: calc(100vh - var(--navbar-height, 60px)); /* Ocupar altura, ajusta --navbar-height si tienes una navbar fija */
+}
+
+.authorWrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px; /* Espacio entre imagen y texto */
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.03); /* Fondo muy sutil para el wrapper si se desea */
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.authorImg {
+    width: 350px; /* Ajusta según necesites */
+    height: 500px; /* Ajusta para la proporción deseada, ej. retrato */
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0; /* Importante para que no se encoja */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.authorTextContainer { /* Nuevo contenedor para todo el texto */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    min-width: 0; /* Para prevenir overflow con flex */
+    display: flex;
+    flex-direction: column; /* Apila nombre, fechas, bio */
+}
+
+.authorName {
+    margin: 0 0 10px 0;
     font-family: "Lora", serif;
-    font-size:18px ;
-    line-height: 25px;
-    white-space: pre-wrap; /* Mantiene los saltos de línea en el texto */
-    margin-left: 0px;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--golden);
+    line-height: 1.3;
+    /* text-align: center; Si quieres el nombre centrado sobre el resto del texto */
 }
-.authorbio::first-letter{
-    margin-left: 20px;
-    font-size: 30px;
-    font-weight: 600;
+
+.authorDates {
+    display: flex; /* Hace que los spans hijos se pongan en fila */
+    justify-content: space-between; /* Separa los dos spans al máximo (uno a la izq, otro a la der) */
+                                   /* O usa 'flex-start' si los quieres juntos a la izquierda, y luego añade 'gap' */
+                                   /* O usa 'center' para centrarlos con espacio entre ellos */
+    align-items: center; /* Alinea verticalmente los spans si tuvieran diferentes alturas (útil si uno tiene más texto) */
+    width: 100%; /* Asegura que ocupe el ancho para que space-between funcione bien */
+    gap: 20px; /* Espacio entre las fechas si no usas space-between, o como mínimo espacio si se envuelven */
+    flex-wrap: wrap; /* Permite que las fechas se pongan una debajo de otra en pantallas pequeñas si no caben */
+
+    font-size: 15px; /* Tamaño de fuente para ambas fechas */
+    color: var(--golden); /* Color para ambas fechas */
+    font-family: "Varela", sans-serif; /* Fuente para ambas fechas */
+
+    margin-bottom: 25px; /* Espacio DESPUÉS del bloque de fechas */
+    padding-bottom: 15px; /* Padding interno antes del borde */
+    border-bottom: 1px solid rgba(247, 228, 118, 0.2);
 }
+
+
+
+.authorBio { /* Contenedor de la biografía */
+    color: var(--text-color);
+    font-family: "Literata", serif; /* Usando una fuente similar a singlePostContent */
+    font-size: 17px;
+    line-height: 1.8; /* Buena legibilidad */
+}
+
+.authorBioParagraph {
+    margin-bottom: 1.2em; /* Espacio entre párrafos de la biografía */
+}
+
+.authorBioParagraph:first-child {
+    margin-top: 0;
+}
+
+/* Estilo para la primera letra del primer párrafo de la biografía */
+.authorBioParagraph:first-of-type::first-letter {
+    font-size: 3em; /* Tamaño de la letra capital */
+    font-weight: bold;
+    color: var(--golden);
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.1em; /* Ajuste para alinear con el texto */
+}
+
+/* Si la biografía es HTML y usas dangerouslySetInnerHTML: */
+/*
+.authorBio > *:first-child {
+    margin-top: 0;
+}
+.authorBio p {
+    margin-bottom: 1.2em;
+}
+.authorBio p:first-of-type::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--golden);
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+}
+*/
