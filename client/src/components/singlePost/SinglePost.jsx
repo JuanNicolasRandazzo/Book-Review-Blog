@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import "./singlePost.css";
 import axios from "axios";
@@ -12,6 +12,7 @@ export const SinglePost = () => {
     const ratingValue = parseFloat(post.rating) || 0;
     const PF = "http://localhost:8000/images/";
     const { user } = useContext(Context);
+    const navigate = useNavigate();
     useEffect(() => {
         const getPost = async () => {
             const res = await axios.get("/posts/" + path);
@@ -19,6 +20,34 @@ export const SinglePost = () => {
         }
         getPost();
     }, [path]);
+
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+        if (!confirmDelete) {
+            return;
+        }
+        try {
+            if (!post || !post._id) {
+                console.error("Post ID is missing from deletion");
+                alert("Error: Post ID is missing. Cannot delete.");
+                return;
+            }
+
+            if (!user || !user._id) {
+                console.error("User ID for authorization is missing");
+                alert("Error: User has not been found.");
+                return;
+            }
+
+
+            await axios.delete(`/posts/${post._id}`, {data: {userId: user._id}});
+            navigate("/");
+        } catch (err) {
+            console.error("Error deleting post:", err);
+            alert("Error deleting post. Please try again later.");
+        }
+        
+    }
     
 
     
@@ -39,7 +68,7 @@ export const SinglePost = () => {
                         {((post.userId?.username === user?.username) || user?.isAdmin) && (
                             <div className="singlePostEdit">
                                 <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
-                                <i className="singlePostIcon fa-solid fa-trash"></i>
+                                <i className="singlePostIcon fa-solid fa-trash" onClick={handleDelete}></i>
                             </div>
                         )}
                         
