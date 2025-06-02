@@ -36,7 +36,7 @@ export const SinglePost = () => {
                 <div className="singlePostText">
                     <h1 className="singlePostTitle">
                         {post.title}
-                        {post.userId?.username === user?.username && (
+                        {((post.userId?.username === user?.username) || user?.isAdmin) && (
                             <div className="singlePostEdit">
                                 <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
                                 <i className="singlePostIcon fa-solid fa-trash"></i>
