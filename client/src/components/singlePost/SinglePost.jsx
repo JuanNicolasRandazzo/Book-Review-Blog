@@ -1,7 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./singlePost.css";
 import axios from "axios";
+import { Context } from "../../context/Context";
 
 export const SinglePost = () => {
     const location = useLocation();
@@ -9,6 +10,8 @@ export const SinglePost = () => {
     const [post, setPost] = useState({})
     const MAX_STARS = 5;
     const ratingValue = parseFloat(post.rating) || 0;
+    const PF = "http://localhost:8000/images/";
+    const { user } = useContext(Context);
     useEffect(() => {
         const getPost = async () => {
             const res = await axios.get("/posts/" + path);
@@ -18,7 +21,7 @@ export const SinglePost = () => {
     }, [path]);
     
 
-    const PF = "http://localhost:8000/images/";
+    
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
@@ -33,10 +36,13 @@ export const SinglePost = () => {
                 <div className="singlePostText">
                     <h1 className="singlePostTitle">
                         {post.title}
-                        <div className="singlePostEdit">
-                            <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
-                            <i className="singlePostIcon fa-solid fa-trash"></i>
-                        </div>
+                        {post.userId?.username === user?.username && (
+                            <div className="singlePostEdit">
+                                <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
+                                <i className="singlePostIcon fa-solid fa-trash"></i>
+                            </div>
+                        )}
+                        
                     </h1>
                     <div className="singlePostInfo">
                         {post.author && ( // Verificar que post.author exista
