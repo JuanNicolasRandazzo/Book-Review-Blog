@@ -49,7 +49,16 @@
     justify-content: space-between; /* Título a la izquierda, iconos a la derecha */
     align-items: center; /* Alineación vertical de título e iconos */
 }
-
+.singlePostTitleInput{
+    margin: 0 0 15px 0;
+    font-family: "Lora", serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    display: flex; /* Para alinear el título y los iconos de edición */
+    justify-content: space-between; /* Título a la izquierda, iconos a la derecha */
+    align-items: center;
+}
 .singlePostEdit {
     display: flex; /* Organiza los iconos */
     gap: 15px; /* Espacio entre iconos de edición */
@@ -213,4 +222,163 @@
     /* Puedes añadir flex-wrap: wrap; si quieres que se muevan a la siguiente línea en pantallas pequeñas */
      border-top: 1px solid rgba(247, 228, 118, 0.2); /* Línea divisoria sutil */
     justify-content: space-between; /* Distribuye el espacio entre los elementos */
+}
+
+.singlePostTitleInput {
+    width: 100%; /* Ocupa el ancho disponible en su contenedor */
+    padding: 12px 15px;
+    /* hereda margin, font-family, font-size, font-weight, line-height de tu .singlePostTitleInput existente */
+    color: var(--text-color); /* Color del texto al escribir */
+    background-color: rgba(45, 46, 114, 0.2); /* Fondo sutil para el input, diferente al del post */
+    border: 1px solid var(--secondary-color); /* Borde para destacar */
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.singlePostTitleInput:focus {
+    border-color: var(--golden);
+    box-shadow: 0 0 0 2px rgba(247, 228, 118, 0.3);
+}
+
+/* --- Contenedor y Editor ReactQuill --- */
+/* Esta es una nueva clase para el contenedor del editor Quill */
+.singlePostContentInputContainer {
+    margin-bottom: 30px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    overflow: hidden; /* Para que el borde redondeado contenga el toolbar */
+}
+
+/* Estilos específicos para el editor ReactQuill usando su clase `singlePostContentInput` 
+   que le dimos en el componente JS. Estos se aplican al wrapper que genera ReactQuill. */
+.singlePostContentInput .ql-toolbar {
+    background-color: var(--contrast-color);
+    border: none;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.singlePostContentInput .ql-toolbar .ql-stroke {
+    stroke: var(--golden);
+}
+.singlePostContentInput .ql-toolbar .ql-fill {
+    fill: var(--golden);
+}
+.singlePostContentInput .ql-toolbar button:hover .ql-stroke,
+.singlePostContentInput .ql-toolbar button.ql-active .ql-stroke {
+    stroke: var(--text-color);
+}
+.singlePostContentInput .ql-toolbar button:hover .ql-fill,
+.singlePostContentInput .ql-toolbar button.ql-active .ql-fill {
+    fill: var(--text-color);
+}
+
+.singlePostContentInput .ql-toolbar .ql-picker-label {
+    color: var(--golden);
+}
+.singlePostContentInput .ql-toolbar .ql-picker-label:hover,
+.singlePostContentInput .ql-toolbar .ql-picker.ql-expanded .ql-picker-label {
+    color: var(--text-color);
+}
+.singlePostContentInput .ql-toolbar .ql-picker-options {
+    background-color: var(--contrast-color);
+    border-color: var(--secondary-color) !important;
+}
+.singlePostContentInput .ql-toolbar .ql-picker-item:hover {
+    color: var(--primary-color);
+    background-color: rgba(247, 228, 118, 0.1);
+}
+.singlePostContentInput .ql-toolbar .ql-picker-item.ql-selected {
+    color: var(--golden);
+}
+
+.singlePostContentInput .ql-container {
+    border: none;
+    font-family: "Literata", serif; /* Heredar fuente */
+    font-size: 18px; /* Heredar tamaño */
+    min-height: 250px;
+    background-color: rgba(45, 46, 114, 0.1); /* Fondo muy sutil para el área de texto */
+}
+
+.singlePostContentInput .ql-editor {
+    color: var(--text-color);
+    line-height: 1.7; /* Coincidir con el .singlePostContent */
+    padding: 15px;
+    min-height: 230px; /* Asegurar que el editor tenga altura, puedes ajustar */
+}
+
+.singlePostContentInput .ql-editor.ql-blank::before {
+    color: rgba(224, 224, 224, 0.6);
+    font-style: normal;
+}
+
+/* --- Botones de Actualizar y Cancelar --- */
+/* Estas son clases nuevas para el contenedor de botones y los botones mismos */
+.singlePostUpdateButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(247, 228, 118, 0.2);
+}
+
+.singlePostButton { /* Clase base para ambos botones */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Varela", sans-serif;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.singlePostButton:active {
+    transform: translateY(1px);
+}
+
+/* Clases específicas para cada botón */
+.singlePostButton.update {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.singlePostButton.update:hover {
+    background-color: var(--primary-color);
+}
+
+.singlePostButton.cancel {
+    background-color: var(--accent-color);
+    color: white;
+}
+.singlePostButton.cancel:hover {
+    background-color: #c0392b;
+}
+
+/* --- (Opcional) Input de archivo si lo añades --- */
+.singlePostFormGroup {
+    margin-bottom: 20px;
+}
+
+.singlePostFormGroup label[for="fileInput"] {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--contrast-color);
+    color: var(--golden);
+    border: 1px dashed var(--golden);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Varela", sans-serif;
+}
+
+.singlePostFormGroup label[for="fileInput"]:hover {
+    background-color: var(--golden);
+    color: var(--contrast-color);
+}
+
+.singlePostFormGroup label[for="fileInput"] i {
+    margin-right: 8px;
 }
