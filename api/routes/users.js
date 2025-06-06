@@ -6,41 +6,47 @@ const bcrypt = require('bcrypt');
 
 // UPDATE
 router.put('/:id', async (req, res) => {
-
     try {
-
         const user = await User.findById(req.body.userId);
 
         if (user && (user._id.toString() === req.params.id || user.isAdmin)) {
-
             try {
-                // Si se está cambiando la contraseña, la encriptamos
-                if (req.body.password) {
+                // If a new password is sent and it's not empty, we hash it
+                if (req.body.password && req.body.password.trim() !== "") {
                     const salt = await bcrypt.genSalt(10);
                     req.body.password = await bcrypt.hash(req.body.password, salt);
+                } else {
+                    // If the password is empty or not sent, we delete it from the request body
+                    // To avoid updating the password to an empty value.
+                    delete req.body.password;
                 }
 
-                // Actualizar el usuario
+
                 const updatedUser = await User.findByIdAndUpdate(req.params.id, {
                     $set: req.body,
                 }, { new: true });
 
-                return res.status(200).json("Account has been updated successfully!");
+
+
+                // We separate the password before returnin the user object
+                const { password, ...others } = updatedUser._doc;
+
+
+                // We return the updated user object (without the password)
+                return res.status(200).json(others);
+
+
             } catch (err) {
                 console.error("Error during user update:", err);
-                return res.status(500).json("An error occurred while updating the user.");
+                return res.status(500).json(err);
             }
         } else {
-            return res.status(403).json("You can update only your account!")
+            return res.status(403).json("You can update only your account!");
         }
-
     } catch (err) {
-        console.error("Error during user update:", err);
-        res.status(500).json("An error ocurred while verifying permissions");
+        console.error("Error during user verification:", err);
+        res.status(500).json("An error occurred while verifying permissions");
     }
-
-
-
 });
 
 // DELETE

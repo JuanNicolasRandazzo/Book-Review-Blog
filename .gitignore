@@ -1,2 +1,3 @@
 api/.env
 api/api.http
+api/node_modules

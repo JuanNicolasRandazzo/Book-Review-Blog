@@ -29,6 +29,8 @@ Content-Type: application/json
 
 {
     "userId": "67e2f6074f0e4a2451b58d7c",
+    "username": "Nick Stormblessed",
+    "email": "nicosevenfold18@gmail.com",
     "password": "1234"
 }
 
