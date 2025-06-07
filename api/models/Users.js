@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false,
+    },
+    termsAccepted: {
+        type: Boolean,
+        required: [true, 'You must accept the terms and conditions to register.'],
     }
 }, { timestamps: true });
 

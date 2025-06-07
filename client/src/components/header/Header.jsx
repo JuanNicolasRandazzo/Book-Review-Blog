@@ -5,7 +5,7 @@ export const Header = () => {
     <div className='header'>
         <div className="headerTitles">
             <span className="headerTitleSm">Ascending</span>
-            <span className="headerTitleLg">Blog</span>
+            <span className="headerTitleLg">Library</span>
         </div>
         <img 
             className="headerImg" 
