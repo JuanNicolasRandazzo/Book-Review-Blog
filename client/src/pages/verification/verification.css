@@ -1,0 +1,130 @@
+:root {
+    --primary-color: #6A0DAD;   /* Morado principal */
+    --secondary-color: #8A2BE2; /* Violeta brillante */
+    --accent-color: #E43F5A;    /* Rojo vibrante para detalles */
+    --contrast-color: #2D2E72;  /* Azul profundo para contrastes */
+    --background-color: #1E1E2E; /* Fondo oscuro elegante */
+    --text-color: #E0E0E0;      /* Blanco suave para legibilidad */
+    --golden: #f7e476;
+    --success-green: #28a745;   /* Un verde para el ícono de éxito */
+}
+
+/* Contenedor principal para centrar todo */
+.verificationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Ajusta 60px a la altura de tu navbar */
+    background-color: var(--background-color);
+    padding: 20px;
+    font-family: 'Varela Round', sans-serif; /* Unificamos la fuente */
+}
+
+/* La tarjeta que contiene el mensaje */
+.verificationCard {
+    background-color: #2a2a3e; /* Un poco más claro que el fondo para destacar */
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid var(--primary-color);
+    transform: translateY(-50px); /* Pequeño truco para que no parezca tan centrado */
+}
+
+/* Ícono de verificación */
+.verificationIcon {
+    font-size: 60px;
+    color: var(--success-green);
+    margin-bottom: 20px;
+    animation: pop-in 0.5s ease-out; /* Pequeña animación */
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.verificationTitle {
+    font-family: "Lora", serif;
+    font-size: 32px; /* Ligeramente más pequeño para el contenedor */
+    font-weight: 700;
+    color: var(--golden);
+    margin-bottom: 15px;
+}
+
+.verificationInfo {
+    color: var(--text-color);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px; /* Más espacio antes del botón */
+}
+
+/* Estilizando el Link como un botón */
+.verificationLink {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4); /* Sombra a juego */
+}
+
+.verificationLink:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px); /* Efecto de levantar al pasar el ratón */
+}
+
+.verificationFailMessage {
+    color: #a0a0a0; /* Un gris más suave para que no compita */
+    font-size: 14px;
+    margin-top: 30px; /* Espacio para separar del botón */
+}
+
+/*FAILURE*/
+
+.verificationCard.error {
+    border-color: var(--accent-color); /* Usamos el rojo vibrante */
+}
+
+/* Ícono de error */
+.verificationIcon.error {
+    color: var(--accent-color); /* Color rojo para el ícono */
+    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; /* Animación de "sacudir" */
+}
+
+/* Animación para el ícono de error */
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.verificationTitle.error {
+    color: var(--accent-color); /* Título en rojo */
+}
+
+/* Reutilizamos .verificationLink, pero podemos darle un estilo de "reintentar" o alternativo */
+.verificationLink.retry {
+    background-color: var(--contrast-color); /* Usamos el azul profundo */
+    box-shadow: 0 4px 15px rgba(45, 46, 114, 0.4);
+}
+
+.verificationLink.retry:hover {
+    background-color: #1e1f50; /* Un azul un poco más oscuro */
+}

@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./context/Context";
+import { VerificationSuccess } from "./pages/verification/VerificationSuccess";
+import { VerificationFailure } from "./pages/verification/VerificationFailure";
 
 
 
@@ -29,6 +31,9 @@ function App() {
         <Route path="/settings" element={user ? <Settings /> : <Register />} />
         <Route path="/post/:postId" element={<Single />} />
         <Route path="/authors/:authorId" element={<Author />} />
+        <Route path="/verify-email/:token" element={<p>Verifying...</p>} />
+        <Route path="/verification-success" element={<VerificationSuccess />} />
+        <Route path="/verification-failure" element={<VerificationFailure />} />
       </Routes>
     </Router>
   );
