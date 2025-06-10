@@ -93,7 +93,7 @@ npm start
 
 **Juan Nicolas Randazzo**
 
-- **GitHub:** (https://github.com/tu_usuario_github)](https://github.com/JuanNicolasRandazzo)
+- **GitHub:** (https://github.com/JuanNicolasRandazzo)
 - **LinkedIn:** (https://www.linkedin.com/in/tu_perfil_linkedin)]
 - **Email:** nicolas_randazzo_castaneda@outlook.com
 
